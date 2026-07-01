@@ -149,3 +149,6 @@ If this project helped you, consider giving it a ⭐ on GitHub.
 It helps more developers discover the project and motivates future updates.
 
 Happy Coding! ❤️
+
+Dont Forget to join Horizon Studio Server :
+https://discord.gg/eWCK8dMxXw
