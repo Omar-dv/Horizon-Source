@@ -1,0 +1,95 @@
+# Permission Snippets for Discord.js v14
+
+## 1) Owners Only Command
+```js
+const config = require("../../database/setup-files/config.json");
+
+module.exports = {
+    name: "owneronly",
+    aliases: [],
+
+    async execute(message, args, client) {
+        const owners = config.owners || [];
+
+        if (!owners.includes(message.author.id)) {
+            return message.reply("This command is reserved for owners only.");
+        }
+
+        message.reply("Owner command executed successfully.");
+    }
+};
+```
+
+## 2) Admin Only Command
+```js
+const config = require("../../database/setup-files/config.json");
+
+module.exports = {
+    name: "admin",
+    aliases: [],
+
+    async execute(message, args, client) {
+        const adminRoleName = config.adminRoleName || "Admin";
+        const member = message.member;
+
+        if (!member) return message.reply("This command can only be used in a server.");
+
+        const hasAdminRole = member.roles.cache.some(role => role.name === adminRoleName);
+        const isOwner = (config.owners || []).includes(message.author.id);
+
+        if (!hasAdminRole && !isOwner) {
+            return message.reply("You do not have permission to use this command.");
+        }
+
+        message.reply("Admin command executed successfully.");
+    }
+};
+```
+
+## 3) Support Role Command
+```js
+const config = require("../../database/setup-files/config.json");
+
+module.exports = {
+    name: "support",
+    aliases: [],
+
+    async execute(message, args, client) {
+        const supportRoleName = config.supportRoleName || "Support";
+        const member = message.member;
+
+        if (!member) return message.reply("This command can only be used in a server.");
+
+        const hasSupportRole = member.roles.cache.some(role => role.name === supportRoleName);
+        const isOwner = (config.owners || []).includes(message.author.id);
+
+        if (!hasSupportRole && !isOwner) {
+            return message.reply("You do not have permission to use this command.");
+        }
+
+        message.reply("Support command executed successfully.");
+    }
+};
+```
+
+## 4) Slash Command Example (Owners Only)
+```js
+const { SlashCommandBuilder } = require("discord.js");
+const config = require("../../database/setup-files/config.json");
+
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName("ownercheck")
+        .setDescription("Owner only command"),
+
+    async execute(interaction) {
+        const owners = config.owners || [];
+
+        if (!owners.includes(interaction.user.id)) {
+            return interaction.reply({ content: "This command is reserved for owners only.", ephemeral: true });
+        }
+
+        interaction.reply({ content: "Owner command executed successfully.", ephemeral: true });
+    }
+};
+```

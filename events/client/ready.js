@@ -1,3 +1,5 @@
+const logger = require("../../utils/logger");
+
 module.exports = {
 
     name:"ready",
@@ -5,7 +7,7 @@ module.exports = {
 
     execute(client){
 
-        console.log(`${client.user.tag} Ready!`);
+        logger.success(`Logged in as ${client.user.tag}`);
 
     }
 

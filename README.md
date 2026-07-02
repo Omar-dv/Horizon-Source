@@ -37,7 +37,10 @@ This project is completely open source and designed to serve as a solid foundati
 - ⚙️ JSON Configuration
 - 🍃 MongoDB Ready
 - 🔧 Easy to customize
-- 🚀 Beginner & Advanced Developer Friendly
+- � Professional logger system
+- 🛡️ Centralized error handler
+- ⏱️ Cooldown system for commands
+- �🚀 Beginner & Advanced Developer Friendly
 
 ---
 
@@ -92,13 +95,31 @@ Then edit:
 database/setup-files/config.json
 ```
 
+To use cooldowns, add a `cooldown` value in seconds to your command object.
+Example:
+
+```js
+module.exports = {
+  name: "example",
+  cooldown: 10,
+  async execute(message, args, client) {
+    message.reply("Hello");
+  },
+};
+```
+
 Example:
 
 ```json
 {
-  "prefix": "!"
+  "prefix": "!",
+  "owners": ["YOUR_DISCORD_USER_ID"],
+  "adminRoleName": "Admin",
+  "supportRoleName": "Support"
 }
 ```
+
+You can find ready-made permission command examples in [Permissions.txt](Permissions.txt).
 
 ---
 

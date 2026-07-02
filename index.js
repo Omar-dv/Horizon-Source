@@ -7,6 +7,7 @@ const {
     GatewayIntentBits,
     Collection
 } = require("discord.js");
+const logger = require("./utils/logger");
 
 const token = process.env.TOKEN;
 
@@ -20,6 +21,9 @@ const client = new Client({
 
 client.slashCommands = new Collection();
 client.prefixCommands = new Collection();
+client.cooldown = require("./utils/cooldown");
+
+logger.info("Bot starting...");
 
 require("./utils/handlers/eventHandler")(client);
 require("./utils/handlers/slashHandler")(client);

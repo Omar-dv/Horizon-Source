@@ -1,3 +1,8 @@
 {
-    "prefix": "!"
+    "prefix": "!",
+    "owners": [
+        "YOUR_DISCORD_USER_ID"
+    ],
+    "adminRoleName": "Admin",
+    "supportRoleName": "Support"
 }
